@@ -1,10 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, ViewController, Platform, Slides } from 'ionic-angular';
 import { ShowTimesPage } from '../showtimes/showtimes';
-import { ImdbPage } from '../imdb/imdb';
 import { RatingsPage } from '../ratings/ratings';
 import { TicketsPage } from '../tickets/tickets';
 import { TrailerPage } from '../trailer/trailer';
+import { ImdbPage } from "../imdb/imdb";
 
 @Component({
   selector: 'page-menu',
