@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{(fan) ? fan.feed.description : fan}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="movies" class="outer-content speaker-list" >
+  <section *ngFor="let f of movies | async" >
+    <span>
+      <p (click)="f.show=!f.show">{{f.title}}</p>
+      <article *ngIf="f.show" [innerHTML]="f.content">
+      </article>
+    </span>
+  </section>
+  
+    <ul>
+    <li *ngFor="let item of items | async">
+      <input type="text" #updatetext [value]="item.text" />
+      <button (click)="updateItem(item.$key, updatetext.value)">Update</button>
+      <button (click)="deleteItem(item.$key)">Delete</button>
+    </li>
+  </ul>
+  <input type="text" #newitem />
+  <button (click)="addItem(newitem.value)">Add</button>
+  <button (click)="deleteEverything()">Delete All</button>
+
+</ion-content>

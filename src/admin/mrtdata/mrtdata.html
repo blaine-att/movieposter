@@ -1,0 +1,120 @@
+<ion-split-pane>
+
+  <!-- logged out menu -->
+  <ion-menu id="loggedOutMenu" [content]="content">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="outer-content">
+
+      <ion-list>
+        <ion-list-header>
+          Navigate
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
+          <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
+          {{p.title}}
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Account
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
+          <ion-icon *ngIf="!p.logsIn" item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
+         
+          <ion-avatar *ngIf="p.logsIn" item-left>
+             <img src="assets/img/github.png">
+          </ion-avatar>
+
+          {{p.title}}
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Tutorial
+        </ion-list-header>
+        <button ion-item menuClose (click)="openTutorial()">
+          <ion-icon item-left name="hammer"></ion-icon>
+          Show Tutorial
+        </button>
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+
+  <!-- logged in menu -->
+  <ion-menu id="loggedInMenu" [content]="content">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="outer-content">
+
+      <ion-list>
+        <ion-list-header>
+          Navigate
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
+          <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
+          {{p.title}}
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Account
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
+          <ion-icon *ngIf="!p.logsOut" item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
+          <ion-avatar *ngIf="p.logsOut" item-left>
+             <img [src]="userData.getUserPicture()">
+          </ion-avatar>
+          {{p.title}}
+          
+        </button>
+
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Tutorial
+        </ion-list-header>
+        <button ion-item menuClose (click)="openTutorial()">
+          <ion-icon item-left name="hammer"></ion-icon>
+          Show Tutorial
+        </button>
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+<ion-content no-lines>
+    <ion-list>
+        <ion-item *ngFor='let msg of messages'>
+           <chat-bubble [message]="msg"></chat-bubble>
+        </ion-item>
+    </ion-list>     
+    <ion-label color="primary" stacked>How can I help you?</ion-label>
+    <ion-input placeholder="Message" [(ngModel)]="chatBox" (enter)="ask(chatBox)"></ion-input>
+    <ion-buttons left>
+         <button ion-button block (click)="ask(chatBox)">Send</button>
+         <button ion-button icon-left color='{{buttonColor}}' (click)="switchRecognition()">
+            <ion-icon name="microphone"></ion-icon>
+            {{buttonLabel}}
+         </button>
+    </ion-buttons>
+</ion-content>
+
+ 
+</ion-split-pane>
